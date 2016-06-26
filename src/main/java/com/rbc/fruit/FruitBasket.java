@@ -1,8 +1,6 @@
 package com.rbc.fruit;
 
-import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
 import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,10 +41,10 @@ public class FruitBasket {
 
         Map<Pair<String, Integer>, BigDecimal> subTotalByFruitType = Maps.newHashMap();
 
-        ImmutableListMultimap<String, Fruit> fruitBucket = Multimaps.index(fruitList, Fruit::getName);
+        Map<String, List<Fruit>> index = fruitList.stream().collect(Collectors.groupingBy(Fruit::getName));
 
-        for (String fruit : fruitBucket.keySet()) {
-            List<BigDecimal> fruits = fruitBucket.get(fruit).stream().map(f -> f.getPrice()).collect(Collectors.toList());
+        for (String fruit : index.keySet()) {
+            List<BigDecimal> fruits = index.get(fruit).stream().map(f -> f.getPrice()).collect(Collectors.toList());
             BigDecimal subTotal = fruits.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
             subTotalByFruitType.put(new Pair(fruit, fruits.size()), subTotal);
         }
