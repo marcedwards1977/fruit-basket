@@ -24,7 +24,6 @@ public class ItemGeneratorTest {
 
     @Test
     public void generateRandomFruitListTest() {
-
         log.info("generateRandomFruitListTest() : start");
 
         List<Fruit> fruit = itemGenerator.generateRandomFruitList(quantity);

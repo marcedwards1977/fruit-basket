@@ -17,16 +17,14 @@ public class FruitTest {
 
     @Test
     public void fruitEnumTest() {
-
         log.info("fruitEnumTest() : start");
-
         int distinctFruitCount = 0;
 
         for (Fruit.FruitEnum fruit : Fruit.FruitEnum.values()) {
             log.info("fruit={}", fruit.toString());
             distinctFruitCount++;
         }
-
         Assert.assertEquals(distinctFruitCount, Fruit.FruitEnum.values().length);
+        log.info("fruitEnumTest() : end");
     }
 }

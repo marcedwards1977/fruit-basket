@@ -54,6 +54,4 @@ public class FruitBasket {
         log.debug("calculateSubTotals() : end : [subTotalByFruitType={}]", subTotalByFruitType);
         return subTotalByFruitType;
     }
-
-
 }
