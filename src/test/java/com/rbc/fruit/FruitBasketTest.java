@@ -2,7 +2,6 @@ package com.rbc.fruit;
 
 import javafx.util.Pair;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -12,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -29,40 +27,33 @@ public class FruitBasketTest {
 
     int quantity = 20;
     List<Fruit> fruitList;
-    NumberFormat fmt;
+
+    @Test
+    public void emptyBasketTest() {
+        fruitList = itemGenerator.generateRandomFruitList(0);
+        BigDecimal total = fruitBasket.calculateTotal(fruitList);
+        Assert.assertTrue(total.compareTo(BigDecimal.ZERO) == 0);
+    }
 
     @Test
     public void basketTotalTest() {
-        log.info("basketTotalTest() : start");
-
+        fruitList = itemGenerator.generateRandomFruitList(quantity);
         BigDecimal total = fruitBasket.calculateTotal(fruitList);
         Assert.assertTrue(total.compareTo(BigDecimal.ZERO) > 0);
-
-        log.info("basketTotalTest() : end : [total={}]", total);
     }
 
     @Test
     public void basketSubTotalTest() {
-        log.info("basketSubTotalTest() : start");
-
+        fruitList = itemGenerator.generateRandomFruitList(quantity);
         Map<Pair<String, Integer>, BigDecimal> subTotals = fruitBasket.calculateSubTotals(fruitList);
 
         for(Map.Entry<Pair<String, Integer>, BigDecimal> subTotal : subTotals.entrySet()){
-            Pair fruitKey = subTotal.getKey();
-            Fruit.FruitEnum fruit = Fruit.FruitEnum.valueOf((String)fruitKey.getKey());
-
+            Pair fruitPair = subTotal.getKey();
+            Fruit fruit = Fruit.valueOf((String)fruitPair.getKey());
             log.info("{} {} @ {} each, SubTotal = {}",
-                    new Object[] { fruitKey.getValue(), fruitKey.getKey(),
-                            fmt.format(fruit.value), fmt.format(subTotal.getValue()) });
-
+                    new Object[] { fruitPair.getValue(), fruitPair.getKey(),
+                            fruit.getPrice(), subTotal.getValue() });
             Assert.assertTrue(subTotal.getValue().compareTo(BigDecimal.ZERO) > 0);
         }
-        log.info("basketSubTotalTest() : end");
-    }
-
-    @Before
-    public void setUp(){
-        fruitList = itemGenerator.generateRandomFruitList(quantity);
-        fmt = NumberFormat.getCurrencyInstance();
     }
 }

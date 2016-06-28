@@ -19,10 +19,10 @@ public class ItemGenerator {
      */
     public List<Fruit> generateRandomFruitList(int totalItems){
 
-        List<Fruit> fruit = Lists.newArrayList();
+        List<Fruit> fruitList = Lists.newArrayList();
 
         Random random = new Random();
-        IntStream randomStream = random.ints(0, Fruit.FruitEnum.values().length);
+        IntStream randomStream = random.ints(0, Fruit.values().length);
 
         List<Integer> randomFruitStream = randomStream
                 .limit(totalItems)
@@ -30,10 +30,9 @@ public class ItemGenerator {
                 .collect(Collectors.toList());
 
         for(Integer i : randomFruitStream){
-            Fruit.FruitEnum fruitEnum = Fruit.FruitEnum.values()[i];
-            fruit.add(new Fruit(fruitEnum.name(), fruitEnum.value));
+            Fruit fruit = Fruit.values()[i];
+            fruitList.add(fruit);
         }
-
-        return fruit;
+        return fruitList;
     }
 }
