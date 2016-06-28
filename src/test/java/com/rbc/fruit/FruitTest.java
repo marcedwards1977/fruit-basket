@@ -16,15 +16,13 @@ public class FruitTest {
     private static Logger log = LoggerFactory.getLogger(FruitTest.class);
 
     @Test
-    public void fruitEnumTest() {
-        log.info("fruitEnumTest() : start");
+    public void distinctFruitTypeTest() {
         int distinctFruitCount = 0;
 
-        for (Fruit.FruitEnum fruit : Fruit.FruitEnum.values()) {
+        for (Fruit fruit : Fruit.values()) {
             log.info("fruit={}", fruit.toString());
             distinctFruitCount++;
         }
-        Assert.assertEquals(distinctFruitCount, Fruit.FruitEnum.values().length);
-        log.info("fruitEnumTest() : end");
+        Assert.assertEquals(distinctFruitCount, Fruit.values().length);
     }
 }
