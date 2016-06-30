@@ -36,8 +36,6 @@ public class FruitBasketApp {
 
         List<Fruit> fruits = itemGenerator.generateRandomFruitList(quantity);
 
-        printSubTotal(fruitBasket, fruits);
-
         BigDecimal total = getTotal(fruitBasket, fruits);
         log.info("The total price of your basket of fruit is {}", total);
     }
@@ -46,14 +44,4 @@ public class FruitBasketApp {
         return fruitBasket.calculateTotal(fruits);
     }
 
-    static void printSubTotal(FruitBasket fruitBasket, List<Fruit> fruits){
-        for (Map.Entry<Pair<String, Integer>, BigDecimal> subTotal : fruitBasket.calculateSubTotals(fruits).entrySet()) {
-            Pair fruitKey = subTotal.getKey();
-            Fruit fruit = Fruit.valueOf((String) fruitKey.getKey());
-            log.info("{} {} @ {} each, SubTotal = {}",
-                    new Object[]{fruitKey.getValue(), fruitKey.getKey(),
-                            fruit.getPrice(),
-                            subTotal.getValue()});
-        }
-    }
 }
