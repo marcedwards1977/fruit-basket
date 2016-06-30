@@ -3,27 +3,19 @@ package com.rbc.fruit;
 import javafx.util.Pair;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring/fruit-basket-context.xml"})
 public class FruitBasketTest {
 
     private static Logger log = LoggerFactory.getLogger(FruitBasketTest.class);
 
-    @Autowired
-    ItemGenerator itemGenerator;
-    @Autowired
-    FruitBasket fruitBasket;
+    ItemGenerator itemGenerator = new ItemGenerator();
+    FruitBasket fruitBasket = new FruitBasket();
 
     int quantity = 20;
     List<Fruit> fruitList;

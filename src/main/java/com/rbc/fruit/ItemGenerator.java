@@ -1,9 +1,9 @@
 package com.rbc.fruit;
 
 
-import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -19,7 +19,7 @@ public class ItemGenerator {
      */
     public List<Fruit> generateRandomFruitList(int totalItems){
 
-        List<Fruit> fruitList = Lists.newArrayList();
+        List<Fruit> fruitList = new ArrayList<>();
 
         Random random = new Random();
         IntStream randomStream = random.ints(0, Fruit.values().length);
