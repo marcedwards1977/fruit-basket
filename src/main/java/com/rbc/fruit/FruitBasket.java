@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,6 +15,7 @@ public class FruitBasket {
 
     /**
      * Calculate 'Total' based on List of <Fruit> using getPrice
+     *
      * @param fruitList
      * @return
      */
