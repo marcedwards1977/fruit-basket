@@ -29,10 +29,10 @@ public class ItemGenerator {
                 .boxed()
                 .collect(Collectors.toList());
 
-        for(Integer i : randomFruitStream){
-            Fruit fruit = Fruit.values()[i];
-            fruitList.add(fruit);
-        }
+        randomFruitStream.forEach(entry -> {
+            fruitList.add(Fruit.values()[entry.intValue()]);
+        });
+
         return fruitList;
     }
 }
